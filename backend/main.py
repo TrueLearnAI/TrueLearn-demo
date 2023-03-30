@@ -1,7 +1,7 @@
 from flask import (
     Flask,
     request,
-    render_template
+    send_file
 )
 from flask_cors import CORS
 from data.user_knowledge import knowledge
@@ -24,6 +24,14 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route("/")
 def home():
     return "<p>Backend of the Truelearn visualisations demo.</p>"
+
+
+@app.route("/topics")
+def topics():
+    topics = []
+    for _, kc in knowledge.items():
+        topics.append(kc['title'])
+    return topics
 
 
 @app.route("/line")
@@ -96,9 +104,23 @@ def tree():
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
-@app.route("/topics")
-def topics():
-    topics = []
-    for _, kc in knowledge.items():
-        topics.append(kc['title'])
-    return topics
+@app.route("/bubble")
+def bubble():
+    topics = request.args.get('topics')
+    if not topics:
+        return ""
+    plt = BubblePlotter()
+    path = "temp/temp.png"
+    plt.plot(content=knowledge, topics=topics).to_png(path)
+    return send_file(path)
+
+
+@app.route("/word")
+def word():
+    topics = request.args.get('topics')
+    if not topics:
+        return ""
+    plt = WordPlotter()
+    path = "temp/temp.png"
+    plt.plot(content=knowledge, topics=topics).to_png(path)
+    return send_file(path)

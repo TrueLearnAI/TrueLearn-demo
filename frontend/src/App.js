@@ -38,12 +38,19 @@ class App extends React.Component {
   }
 
   getVisualisation() {
+    let statics = ["bubble", "word"];
     let url = `${server}/${this.state.currentVisualisation}?topics=${this.state.selectedTopics}`;
     axios.get(url)
       .then(response => {
+        let newVisualisation = null;
+        if (statics.includes(this.state.currentVisualisation)) {
+          newVisualisation = url;
+        } else {
+          newVisualisation = response.data;
+        }
         flushSync(() => {
           this.setState({
-            visualisation: response.data
+            visualisation: newVisualisation
           });
         });
       })
@@ -95,7 +102,7 @@ class App extends React.Component {
           currentVisualisation={this.state.currentVisualisation}
           onClick={this.handleVizClick}
         />
-        <Window visualisation={this.state.visualisation}></Window>
+        <Window currentVisualisation={this.state.currentVisualisation} visualisation={this.state.visualisation} />
         <TopicSidebar
           topics={this.state.topics}
           selectedTopics={this.state.selectedTopics}
