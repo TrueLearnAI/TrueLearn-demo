@@ -1,4 +1,8 @@
-from flask import Flask
+from flask import (
+    Flask,
+    request,
+    render_template
+)
 from flask_cors import CORS
 from data.user_knowledge import knowledge
 from plotters import (
@@ -12,6 +16,7 @@ from plotters import (
     RadarPlotter,
     TreePlotter
 )
+import plotly
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -22,10 +27,14 @@ def home():
 
 
 @app.route("/bar")
-def bar(topics):
+def bar():
+    topics = request.args.get('topics')
+    if not topics:
+        return ""
     plt = BarPlotter()
     plt.plot(content=knowledge, topics=topics, history=True)
-    return plt.to_html()
+    # plt.to_html("temp.html")
+    return plotly.io.to_json(plt.figure, pretty=True)
 
 
 @app.route("/topics")

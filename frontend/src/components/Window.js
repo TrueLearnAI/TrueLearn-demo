@@ -1,9 +1,14 @@
 import React from 'react';
+import Plot from 'react-plotly.js';
 
 class Window extends React.Component {
-  render () {
+  render() {
+    let visualisation = this.props.visualisation;
+    if (visualisation === null) {
+      return <></>
+    }
     return (
-      <h2>Visualisation goes here</h2>
+      <Plot style={{ width: "100%" }} data={visualisation.data} layout={visualisation.layout}/>
     )
   }
 }

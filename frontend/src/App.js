@@ -1,4 +1,5 @@
 import React from 'react';
+import { flushSync } from 'react-dom';
 import axios from 'axios';
 import VisualisationSidebar from './components/VisualisationSidebar';
 import Window from './components/Window';
@@ -12,9 +13,10 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentVisualisation: "line",
+      currentVisualisation: "bar",
       topics: [],
-      selectedTopics: []
+      selectedTopics: ["Machine learning", "Cognitive science", "Algorithm"],
+      visualisation: null,
     };
     
     this.handleVizClick = this.handleVizClick.bind(this);
@@ -27,17 +29,34 @@ class App extends React.Component {
       .then(response => {
         this.setState({
           topics: response.data
-        })
+        });
       })
       .catch(error => {
         console.log(error);
       });
+    this.getVisualisation();
+  }
+
+  getVisualisation() {
+    let url = `${server}/${this.state.currentVisualisation}?topics=${this.state.selectedTopics}`;
+    axios.get(url)
+      .then(response => {
+        flushSync(() => {
+          this.setState({
+            visualisation: response.data
+          });
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   handleVizClick(visualisationClicked) {
     this.setState({
       currentVisualisation: visualisationClicked
     });
+    this.getVisualisation();
   }
 
   handleTopicClick(topicClicked) {
@@ -50,15 +69,19 @@ class App extends React.Component {
     } else {
       newTopics = currentTopics.concat(topicClicked)
     }
-    this.setState({
-      selectedTopics: newTopics
-    })
+    flushSync(() => {
+      this.setState({
+        selectedTopics: newTopics
+      })
+    });
+    this.getVisualisation();
   }
 
   handleClearSelection() {
     this.setState({
       selectedTopics: []
     })
+    this.getVisualisation();
   }
 
   render() {
@@ -68,7 +91,7 @@ class App extends React.Component {
           currentVisualisation={this.state.currentVisualisation}
           onClick={this.handleVizClick}
         />
-        <Window></Window>
+        <Window visualisation={this.state.visualisation}></Window>
         <TopicSidebar
           topics={this.state.topics}
           selectedTopics={this.state.selectedTopics}
