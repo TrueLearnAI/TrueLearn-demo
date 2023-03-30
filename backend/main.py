@@ -1,9 +1,12 @@
+import os
+
 from flask import (
     Flask,
     request,
     send_file
 )
 from flask_cors import CORS
+
 from data.user_knowledge import knowledge
 from plotters import (
     LinePlotter,
@@ -50,7 +53,7 @@ def pie():
     if not topics:
         return ""
     plt = PiePlotter()
-    plt.plot(content=knowledge, topics=topics)
+    plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
@@ -70,7 +73,7 @@ def bar():
     if not topics:
         return ""
     plt = BarPlotter()
-    plt.plot(content=knowledge, topics=topics)
+    plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
@@ -80,7 +83,7 @@ def dot():
     if not topics:
         return ""
     plt = DotPlotter()
-    plt.plot(content=knowledge, topics=topics)
+    plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
@@ -100,27 +103,29 @@ def tree():
     if not topics:
         return ""
     plt = TreePlotter()
-    plt.plot(content=knowledge, topics=topics)
+    plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
 @app.route("/bubble")
 def bubble():
+    os.remove("temp.png")
     topics = request.args.get('topics')
     if not topics:
         return ""
     plt = BubblePlotter()
-    path = "temp/temp.png"
+    path = "temp.png"
     plt.plot(content=knowledge, topics=topics).to_png(path)
     return send_file(path)
 
 
 @app.route("/word")
 def word():
+    os.remove("temp.png")
     topics = request.args.get('topics')
     if not topics:
         return ""
     plt = WordPlotter()
-    path = "temp/temp.png"
+    path = "temp.png"
     plt.plot(content=knowledge, topics=topics).to_png(path)
     return send_file(path)

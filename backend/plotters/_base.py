@@ -314,8 +314,8 @@ class PlotlyBasePlotter(BasePlotter):
             "<br>".join(
                 [
                     f"Topic: {topic}",
-                    f"Mean: {mean}",
-                    f"Variance: {variance}",
+                    f"Skill: {mean}",
+                    f"Confidence: {variance}",
                     f"Number of Videos Watched: {number_videos}",
                     f"Last Video Watched On: {last_video}",
                     "<extra></extra>"
@@ -325,8 +325,8 @@ class PlotlyBasePlotter(BasePlotter):
             "<br>".join(
                 [
                     f"Topic: {topic}",
-                    f"Mean: {mean}",
-                    f"Variance: {variance}",
+                    f"Skill: {mean}",
+                    f"Confidence: {variance}",
                     "<extra></extra>"
                 ]
             )

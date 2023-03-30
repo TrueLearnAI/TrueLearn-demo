@@ -16,7 +16,7 @@ class RadarPlotter(PlotlyBasePlotter):
         content: Union[Knowledge, List[Tuple[float, float, str]]],
         topics: Optional[Iterable[str]] = None,
         top_n: Optional[int] = None,
-        title: str = "Mean and variance across different topics.",
+        title: str = "Skill and confidence across different topics.",
         x_label: str = "",
         y_label: str = "",
     ) -> Self:
@@ -62,7 +62,7 @@ class RadarPlotter(PlotlyBasePlotter):
             r = r, 
             theta = theta, 
             fill = 'toself',
-            name= 'Variances',
+            name= 'Confidence',
             hovertemplate=self._hovertemplate("%{r}")
         )
 
@@ -80,7 +80,7 @@ class RadarPlotter(PlotlyBasePlotter):
         return (
             "<br>".join(
                 [
-                    f"Variance: {variance}",
+                    f"Confidence: {variance}",
                     "<extra></extra>"
                 ]
             )

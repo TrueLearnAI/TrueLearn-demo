@@ -19,7 +19,7 @@ class WordPlotter(MatplotlibBasePlotter):
         content: Union[Knowledge, List[Tuple[float, float, str]]],
         topics: Optional[Iterable[str]] = None,
         top_n: Optional[int] = None,
-        title: str = "Comparison of learner's subjects",
+        title: str = "Wordcloud of learner's topics",
         x_label: str = "",
         y_label: str = "",
     ) -> Self:

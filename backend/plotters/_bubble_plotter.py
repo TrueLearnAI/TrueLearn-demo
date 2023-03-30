@@ -22,7 +22,7 @@ class BubblePlotter(MatplotlibBasePlotter):
         content: Union[Knowledge, List[Tuple[float, float, str]]],
         topics: Optional[Iterable[str]] = None,
         top_n: Optional[int] = None,
-        title: str = "Comparison of learner's subjects",
+        title: str = "Comparison of learner's topics",
         x_label: str = "",
         y_label: str = "",
     ) -> Self:
@@ -84,6 +84,6 @@ class BubblePlotter(MatplotlibBasePlotter):
                 )
 
         cbar = fig.colorbar(sm, ax=ax)
-        cbar.ax.set_ylabel('Variance')
+        cbar.ax.set_ylabel('Confidence')
 
         return self

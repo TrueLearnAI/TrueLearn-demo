@@ -44,7 +44,7 @@ class PiePlotter(PlotlyBasePlotter):
         title: str = "Distribution of user's skill.",
         x_label: str = "",
         y_label: str = "",
-        other: bool = False,
+        other: bool = True,
         history: bool = False,
     ) -> Self:
         content, rest = self._standardise_data(content, history, topics)
@@ -208,7 +208,7 @@ class RosePlotter(PiePlotter):
         average_mean = sum(means) / len(means)
         traces.append(
             go.Scatterpolar(
-                name="Average mean",
+                name="Average skill",
                 r=[average_mean for _ in range(360)],
                 theta=list(range(360)),
                 mode='lines',

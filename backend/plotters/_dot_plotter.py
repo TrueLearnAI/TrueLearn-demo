@@ -18,9 +18,9 @@ class DotPlotter(PlotlyBasePlotter):
         content: Union[Knowledge, List[Tuple[float, float, str]]],
         topics: Optional[Iterable[str]] = None,
         top_n: Optional[int] = None,
-        title: str = "Comparison of learner's subjects",
-        x_label: str = "Subjects",
-        y_label: str = "Mean",
+        title: str = "Comparison of learner's topics",
+        x_label: str = "Topics",
+        y_label: str = "Skill",
         history: bool = False,
     ) -> Self:
         content = self._standardise_data(content, history, topics)
@@ -53,7 +53,7 @@ class DotPlotter(PlotlyBasePlotter):
                 cmin=min(means) - 0.001,
                 color=means,
                 colorbar=dict(
-                    title="Means"
+                    title="Skill"
                 ),
                 colorscale="Greens"
             ),

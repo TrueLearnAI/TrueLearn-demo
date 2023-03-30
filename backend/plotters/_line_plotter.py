@@ -63,9 +63,9 @@ class LinePlotter(PlotlyBasePlotter):
         content: Iterable[Union[Knowledge, LineChartContentType]],
         topics: Optional[Iterable[str]] = None,
         top_n: Optional[int] = None,
-        title: str = "Mean of user's topics over time",
+        title: str = "User's skill over time",
         x_label: str = "Time",
-        y_label: str = "Mean",
+        y_label: str = "Skill",
         variance: bool = False,
     ) -> Self:
         if isinstance(content, list):
