@@ -4,16 +4,18 @@ import './sidebar.css';
 
 
 function TopicSidebar({ topics, selectedTopics, onClick, onClearSelection }) {
-  const menuItems = topics.map((topic) => {
-    const additionalText = topic in selectedTopics? "☑" : "";
-    return <MenuItem onClick={() => onClick(topic)}>{`${topic}${additionalText}`}</MenuItem>
+  let menuItems = topics.map((topic) => {
+    const additionalText = selectedTopics.includes(topic) ? "☑" : "";
+    return <MenuItem onClick={() => onClick(topic)}>{`${additionalText} ${topic}`}</MenuItem>
   }
   )
   return (
     <Sidebar rtl={true} style={{ height: "100vh" }}>
       <Menu id="menu">
         {menuItems}
-        <MenuItem style={{ textAlign: "center" }} onClick={() => onClearSelection()}>X Clear selections X</MenuItem>
+        <MenuItem style={{ textAlign: "center" }} onClick={() => onClearSelection()}>
+          <b>✗ Clear selections ✗</b>
+        </MenuItem>
       </Menu>
     </Sidebar>
   );

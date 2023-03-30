@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentVisualisations: null,
+      currentVisualisation: "line",
       topics: [],
       selectedTopics: []
     };
@@ -36,13 +36,22 @@ class App extends React.Component {
 
   handleVizClick(visualisationClicked) {
     this.setState({
-      currentVisualisations: visualisationClicked
+      currentVisualisation: visualisationClicked
     });
   }
 
   handleTopicClick(topicClicked) {
+    let currentTopics = this.state.selectedTopics;
+    let newTopics = null;
+    if (currentTopics && currentTopics.includes(topicClicked)) {
+      newTopics = currentTopics.filter((topic) => 
+        topic !== topicClicked
+      );
+    } else {
+      newTopics = currentTopics.concat(topicClicked)
+    }
     this.setState({
-      selectedTopics: this.state.selectedTopics.concat(topicClicked)
+      selectedTopics: newTopics
     })
   }
 
@@ -55,7 +64,10 @@ class App extends React.Component {
   render() {
     return (
       <div id="app" style={({ height: "100vh" }, { display: "flex", justifyContent: "space-between" })}>
-        <VisualisationSidebar onClick={this.handleVizClick} />
+        <VisualisationSidebar
+          currentVisualisation={this.state.currentVisualisation}
+          onClick={this.handleVizClick}
+        />
         <Window></Window>
         <TopicSidebar
           topics={this.state.topics}
