@@ -90,8 +90,7 @@ class LinePlotter(PlotlyBasePlotter):
             topics: Optional[Iterable[str]],
             top_n: Optional[int]
     ):
-        if isinstance(content, Knowledge):
-            content = self._standardise_data(content, True, topics)
+        content = self._standardise_data(content, True, topics)
             
         return content[:top_n]
 

@@ -26,8 +26,7 @@ class BubblePlotter(MatplotlibBasePlotter):
         x_label: str = "",
         y_label: str = "",
     ) -> Self:
-        if isinstance(content, Knowledge):
-            content = self._standardise_data(content, False, topics)
+        content = self._standardise_data(content, False, topics)
 
         content = content[:top_n]
 

@@ -53,8 +53,10 @@ class App extends React.Component {
   }
 
   handleVizClick(visualisationClicked) {
-    this.setState({
-      currentVisualisation: visualisationClicked
+    flushSync(() => {
+      this.setState({
+        currentVisualisation: visualisationClicked
+      });
     });
     this.getVisualisation();
   }
@@ -78,9 +80,11 @@ class App extends React.Component {
   }
 
   handleClearSelection() {
-    this.setState({
-      selectedTopics: []
-    })
+    flushSync(() => {
+      this.setState({
+        selectedTopics: []
+      })
+    });
     this.getVisualisation();
   }
 

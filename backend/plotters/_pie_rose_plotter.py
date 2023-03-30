@@ -47,11 +47,7 @@ class PiePlotter(PlotlyBasePlotter):
         other: bool = False,
         history: bool = False,
     ) -> Self:
-        if isinstance(content, Knowledge):
-            content, rest = self._standardise_data(content, history, topics)
-        else:
-            rest = []
-
+        content, rest = self._standardise_data(content, history, topics)
         rest += content[top_n:]
         content = content[:top_n]
 
@@ -174,8 +170,7 @@ class RosePlotter(PiePlotter):
         other: bool = False,
         history: bool = False,
     ) -> Self:
-        if isinstance(content, Knowledge):
-            content, rest = self._standardise_data(content, True, topics)
+        content, rest = self._standardise_data(content, True, topics)
 
         rest += content[top_n:]
         content = content[:top_n]

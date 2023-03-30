@@ -23,8 +23,7 @@ class TreePlotter(PlotlyBasePlotter):
         y_label: str = "",
         history: bool = False,
     ) -> Self:
-        if isinstance(content, Knowledge):
-            content = self._standardise_data(content, history, topics)
+        content = self._standardise_data(content, history, topics)
 
         content = content[:top_n]
 
