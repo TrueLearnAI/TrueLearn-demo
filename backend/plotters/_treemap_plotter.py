@@ -4,7 +4,7 @@ from typing_extensions import Self
 import numpy as np
 import plotly.graph_objects as go
 
-from _base import (
+from ._base import (
     Knowledge,
     PlotlyBasePlotter
 )

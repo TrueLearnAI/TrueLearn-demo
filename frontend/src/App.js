@@ -1,10 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 import VisualisationSidebar from './components/VisualisationSidebar';
 import Window from './components/Window';
 import TopicSidebar from './components/TopicSidebar';
 
 import './App.css';
 
+const server = 'http://127.0.0.1:5000';
 
 class App extends React.Component {
   constructor() {
@@ -18,6 +20,18 @@ class App extends React.Component {
     this.handleVizClick = this.handleVizClick.bind(this);
     this.handleTopicClick = this.handleTopicClick.bind(this);
     this.handleClearSelection = this.handleClearSelection.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get(server + '/topics')
+      .then(response => {
+        this.setState({
+          topics: response.data
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   handleVizClick(visualisationClicked) {

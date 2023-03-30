@@ -4,7 +4,7 @@ from typing_extensions import Self
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 
-from _base import (
+from ._base import (
     Knowledge,
     MatplotlibBasePlotter
 )

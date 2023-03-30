@@ -8,7 +8,7 @@ from matplotlib import (
 )
 import matplotlib.pyplot as plt
 
-from _base import (
+from ._base import (
     Knowledge,
     MatplotlibBasePlotter
 )
