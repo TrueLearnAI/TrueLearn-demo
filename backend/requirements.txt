@@ -4,7 +4,7 @@ astroid==2.15.0
 bandit==1.7.5
 beautifulsoup4==4.11.1
 black==22.10.0
-certifi==2021.10.8
+certifi==2022.12.7
 charset-normalizer==2.0.12
 circlify==0.15.0
 click==8.1.3
