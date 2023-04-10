@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# TrueLearn-demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This web-app is intended to showcase the flexibility of the `truelearn.utils.visualisations` package and provide an example of how TrueLearn can be integrated into online learning platforms. The app relies on React for the frontend and Flask for the backend.
 
-## Available Scripts
+In order for the app to function as intended, both the backend and frontend must be running at the same time.
 
-In the project directory, you can run:
+## Running the backend
 
-### `npm start`
+To start the server:
+1. Move into the backend directory
+  
+        cd backend
+  
+2. Install the dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+        pip install -r requirements.txt
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Run the Flask server
 
-### `npm test`
+        flask --app main run
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The default server address is [http://localhost:5000](http://localhost:5000).
 
-### `npm run build`
+## Running the frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To run the frontend client:
+1. Move into the frontend directory
+  
+        cd frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install the dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+        npm install
 
-### `npm run eject`
+3. Run the client
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+        npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The client will then be accessible at [http://localhost:3000](http://localhost:3000).
