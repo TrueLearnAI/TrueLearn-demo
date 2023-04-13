@@ -1,5 +1,6 @@
 import os
 
+import plotly
 from flask import (
     Flask,
     request,
@@ -7,8 +8,7 @@ from flask import (
 )
 from flask_cors import CORS
 
-from data.user_knowledge import knowledge
-from plotters import (
+from truelearn.utils.visualisations import (
     LinePlotter,
     PiePlotter,
     RosePlotter,
@@ -19,7 +19,8 @@ from plotters import (
     RadarPlotter,
     TreePlotter
 )
-import plotly
+
+from data.user_knowledge import knowledge
 
 
 app = Flask(__name__)
@@ -34,8 +35,8 @@ def home():
 @app.route("/topics")
 def topics():
     topics = []
-    for _, kc in knowledge.items():
-        topics.append(kc['title'])
+    for _, kc in knowledge.topic_kc_pairs():
+        topics.append(kc.title)
     return topics
 
 
@@ -44,6 +45,7 @@ def line():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = LinePlotter()
     plt.plot(content=knowledge, topics=topics)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -54,6 +56,7 @@ def pie():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = PiePlotter()
     plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -64,8 +67,9 @@ def rose():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = RosePlotter()
-    plt.plot(content=knowledge, topics=topics, history=True)
+    plt.plot(content=knowledge, topics=topics)
     return plotly.io.to_json(plt.figure, pretty=True)
 
 
@@ -74,6 +78,7 @@ def bar():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = BarPlotter()
     plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -84,6 +89,7 @@ def dot():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = DotPlotter()
     plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -94,6 +100,7 @@ def radar():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = RadarPlotter()
     plt.plot(content=knowledge, topics=topics)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -104,6 +111,7 @@ def tree():
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = TreePlotter()
     plt.plot(content=knowledge, topics=topics, history=True)
     return plotly.io.to_json(plt.figure, pretty=True)
@@ -111,25 +119,25 @@ def tree():
 
 @app.route("/bubble")
 def bubble():
-    os.remove("temp.png")
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = BubblePlotter()
     path = "temp.png"
-    plt.plot(content=knowledge, topics=topics).to_png(path)
+    plt.plot(content=knowledge, topics=topics).savefig(path)
     return send_file(path)
 
 
 @app.route("/word")
 def word():
-    os.remove("temp.png")
     topics = request.args.get('topics')
     if not topics:
         return ""
+    topics = topics.split(',')
     plt = WordPlotter()
     path = "temp.png"
-    plt.plot(content=knowledge, topics=topics).to_png(path)
+    plt.plot(content=knowledge, topics=topics).savefig(path)
     return send_file(path)
 
 

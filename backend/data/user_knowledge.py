@@ -1,7 +1,8 @@
 from collections import deque
+from truelearn.models import Knowledge, HistoryAwareKnowledgeComponent
 
 
-knowledge = {
+knowledge_dict = {
     15809: {
         'mean': 0.7447557848684493,
         'variance': 0.3402576248032043,
@@ -570,3 +571,14 @@ knowledge = {
         'history': deque([(0.0, 0.5, 2597189.0)])
     }
 }
+
+
+def dict_to_knowledge(knowledge_dict):
+    new_knowledge_dict = {}
+    for id, kc_dict in knowledge_dict.items():
+        kc = HistoryAwareKnowledgeComponent(**kc_dict)
+        new_knowledge_dict[id] = kc
+    return Knowledge(new_knowledge_dict)
+
+
+knowledge = dict_to_knowledge(knowledge_dict)
