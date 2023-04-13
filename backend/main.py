@@ -21,8 +21,10 @@ from plotters import (
 )
 import plotly
 
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 @app.route("/")
 def home():
@@ -129,3 +131,7 @@ def word():
     path = "temp.png"
     plt.plot(content=knowledge, topics=topics).to_png(path)
     return send_file(path)
+
+
+if __name__ == "__main__":
+    app.run()
