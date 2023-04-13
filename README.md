@@ -1,6 +1,6 @@
 # TrueLearn-demo
 
-This web-app is intended to showcase the flexibility of the `truelearn.utils.visualisations` package and provide an example of how TrueLearn can be integrated into online learning platforms. The app relies on React for the frontend and Flask for the backend.
+This web app is intended to showcase the flexibility of the `truelearn.utils.visualisations` package and provide an example of how TrueLearn can be integrated into online learning platforms. The app relies on React for the frontend and Flask for the backend.
 
 In order for the app to function as intended, both the backend and frontend must be running at the same time.
 
